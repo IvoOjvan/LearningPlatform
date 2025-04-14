@@ -1,10 +1,9 @@
 package com.iso.LearningPlatform.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +22,7 @@ public class Author {
     private String email;
 
     private int age;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Course> courses;
 }

@@ -1,12 +1,12 @@
 package com.iso.LearningPlatform.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -19,4 +19,21 @@ public class Course {
     private Integer id;
     private String name;
     private String description;
+
+    @ManyToMany
+    @JoinTable(
+        name = "authors_courses",
+        joinColumns = {
+            @JoinColumn(name = "course_id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "author_id")
+        }
+    )
+    private List<Author> authors;
+
+
+    //ONE Course TO MANY Sections
+    @OneToMany(mappedBy = "course")
+    private List<Section> sections;
 }
